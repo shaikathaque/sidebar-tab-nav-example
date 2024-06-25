@@ -1,20 +1,32 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Sidebar from "./Sidebar"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+
+const sidebarItems = [{ title: 'General'}, { title: 'Endpoints'}, { title: 'Tokens and Claims'}];
 
 export default function SettingsContainer() {
   return (
-    <div>
-      <h1>Settings</h1>
-      <Tabs defaultValue="account" className="w-[400px]">
-        <TabsList>
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">Make changes to your account here.</TabsContent>
-        <TabsContent value="password">Change your password here.</TabsContent>
-      </Tabs>
-      <Sidebar />
+    <div className="grid grid-cols-5">
+      <Sidebar items={sidebarItems} />
 
+      <div className="col-span-4 border-l">
+        <div className="h-full px-8 py-6">
+          <Tabs defaultValue="general" className="space-y-6">
+            <div className="space-between flex items-center">
+              <TabsList>
+                <TabsTrigger value="general">
+                  General
+                </TabsTrigger>
+                <TabsTrigger value="authorization">
+                  Authorization
+                </TabsTrigger>
+                <TabsTrigger value="token">
+                  Token
+                </TabsTrigger>
+              </TabsList>
+            </div>
+          </Tabs>
+        </div>
+      </div>
     </div>
   )
 }
