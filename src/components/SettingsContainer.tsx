@@ -1,5 +1,5 @@
 import Sidebar from "./Sidebar"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 const sidebarItems = [{ title: 'General'}, { title: 'Endpoints'}, { title: 'Tokens and Claims'}];
 
@@ -27,6 +27,9 @@ export default function SettingsContainer() {
           </Tabs>
         </div>
       </div>
+
+
+    
     </div>
   )
 }
