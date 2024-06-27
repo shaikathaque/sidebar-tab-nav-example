@@ -5,38 +5,64 @@ import './index.css'
 import SettingsContainer from './components/SettingsContainer'
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./components/ui/accordion"
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import GlobalSettings from './components/SettingsContent/Endpoints/GlobalSettings';
+import Authorization from './components/SettingsContent/Endpoints/Authorization';
+import Token from './components/SettingsContent/Endpoints/Token';
+import General from './components/SettingsContent/Endpoints/General';
+import AccessToken from './components/SettingsContent/TokensAndClaims/AccessToken';
+import Claims from './components/SettingsContent/TokensAndClaims/Claims';
+
+const settingsRoutes = [
+  {
+    path: "endpoints",
+    children: [
+      {
+        path: "globalSettings",
+        element: <GlobalSettings />,
+      },
+      {
+        path: "authorization",
+        element: <Authorization />,
+      },
+      {
+        path: "token",
+        element: <Token />,
+      },
+      {
+        path: "general",
+        element: <General />,
+      }
+    ]
+  },
+  {
+    path: "tokensAndClaims",
+    children: [
+      {
+        path: "accessToken",
+        element: <AccessToken />,
+      },
+      {
+        path: "claims",
+        element: <Claims />,
+      },
+    ]
+  }
+]
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SettingsContainer />,
+    errorElement: <h1>Custom Error Page</h1>,
+    children: settingsRoutes
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SettingsContainer />
-
-    {/* <Accordion type="single" collapsible className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It comes with default styles that matches the other
-          components&apos; aesthetic.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
-          Yes. It&apos;s animated by default, but you can disable it if you
-          prefer.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion> */}
-    
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
