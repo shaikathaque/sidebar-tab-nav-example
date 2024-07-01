@@ -1,9 +1,8 @@
-import SettingsTabs from "@/components/SettingsTabs";
-import { Outlet } from "react-router-dom";
 import SectionAItem1Tab1 from "./Item1/Tab1";
 import SectionAItem1Tab2 from "./Item1/Tab2";
 import SectionAItem2Tab1 from "./Item2/Tab1";
 import SectionAItem2Tab2 from "./Item2/Tab2";
+import SettingsItemContainer from "@/components/SettingsItemContainer";
 
 export const item1Tabs = [
   {
@@ -19,14 +18,6 @@ export const item1Tabs = [
     component: <SectionAItem1Tab2 />,
   },
 ];
-export function Item1() {
-  return (
-    <>
-      <SettingsTabs tabs={item1Tabs} />
-      <Outlet />
-    </>
-  );
-}
 
 export const item2Tabs = [
   {
@@ -42,11 +33,19 @@ export const item2Tabs = [
     component: <SectionAItem2Tab2 />,
   },
 ];
-export function Item2() {
-  return (
-    <>
-      <SettingsTabs tabs={item2Tabs} />
-      <Outlet />
-    </>
-  );
-}
+
+export const sectionAConfig = {
+  path: "sectionA",
+  items: [
+    {
+      path: "item1",
+      component: <SettingsItemContainer tabs={item1Tabs} />,
+      tabs: item1Tabs,
+    },
+    {
+      path: "item2",
+      component: <SettingsItemContainer tabs={item2Tabs} />,
+      tabs: item2Tabs,
+    },
+  ],
+};

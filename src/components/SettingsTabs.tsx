@@ -1,7 +1,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation, useNavigate } from "react-router-dom";
 
-type Tab = {
+export type Tab = {
   title: string;
   value: string;
   path: string;

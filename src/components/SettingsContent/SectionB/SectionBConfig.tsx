@@ -5,6 +5,7 @@ import SectionBItem1Tab1 from "./Item1/Tab1";
 import SectionBItem1Tab2 from "./Item1/Tab2";
 import SectionBItem2Tab1 from "./Item2/Tab1";
 import SectionBItem2Tab2 from "./Item2/Tab2";
+import SettingsItemContainer from "@/components/SettingsItemContainer";
 
 export const item1Tabs = [
   {
@@ -20,6 +21,20 @@ export const item1Tabs = [
     component: <SectionBItem1Tab2 />,
   },
 ];
+
+// export const sectionBConfig = {
+//   path: "sectionB",
+//   items: [
+//     {
+//       path: "item1",
+//       component: <SettingsItemContainer tabs={item1Tabs} />,
+//       tabs: [
+
+//       ],
+//     },
+//   ],
+// };
+
 export function Item1() {
   return (
     <>
