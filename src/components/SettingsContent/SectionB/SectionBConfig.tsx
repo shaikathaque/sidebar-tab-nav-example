@@ -1,6 +1,3 @@
-import SettingsTabs from "@/components/SettingsTabs";
-import { Outlet } from "react-router-dom";
-
 import SectionBItem1Tab1 from "./Item1/Tab1";
 import SectionBItem1Tab2 from "./Item1/Tab2";
 import SectionBItem2Tab1 from "./Item2/Tab1";
@@ -22,28 +19,6 @@ export const item1Tabs = [
   },
 ];
 
-// export const sectionBConfig = {
-//   path: "sectionB",
-//   items: [
-//     {
-//       path: "item1",
-//       component: <SettingsItemContainer tabs={item1Tabs} />,
-//       tabs: [
-
-//       ],
-//     },
-//   ],
-// };
-
-export function Item1() {
-  return (
-    <>
-      <SettingsTabs tabs={item1Tabs} />
-      <Outlet />
-    </>
-  );
-}
-
 export const item2Tabs = [
   {
     value: "tab1",
@@ -58,11 +33,19 @@ export const item2Tabs = [
     component: <SectionBItem2Tab2 />,
   },
 ];
-export function Item2() {
-  return (
-    <>
-      <SettingsTabs tabs={item2Tabs} />
-      <Outlet />
-    </>
-  );
-}
+
+export const sectionBConfig = {
+  path: "sectionB",
+  items: [
+    {
+      path: "item1",
+      component: <SettingsItemContainer tabs={item1Tabs} />,
+      tabs: item1Tabs,
+    },
+    {
+      path: "item2",
+      component: <SettingsItemContainer tabs={item2Tabs} />,
+      tabs: item2Tabs,
+    },
+  ],
+};
