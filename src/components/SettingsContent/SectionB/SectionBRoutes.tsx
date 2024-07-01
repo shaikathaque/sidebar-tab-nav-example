@@ -1,8 +1,4 @@
-import SectionBItem1Tab1 from "./Item1/Tab1";
-import SectionBItem1Tab2 from "./Item1/Tab2";
-import SectionBItem2Tab1 from "./Item2/Tab1";
-import SectionBItem2Tab2 from "./Item2/Tab2";
-import { Item1, Item2 } from "./SectionBConfig";
+import { Item1, Item2, item1Tabs, item2Tabs } from "./SectionBConfig";
 
 export const sectionBRoutes = {
   path: "sectionB",
@@ -10,30 +6,18 @@ export const sectionBRoutes = {
     {
       path: "item1",
       element: <Item1 />,
-      children: [
-        {
-          path: "tab1",
-          element: <SectionBItem1Tab1 />,
-        },
-        {
-          path: "tab2",
-          element: <SectionBItem1Tab2 />,
-        },
-      ],
+      children: item1Tabs.map((tab) => ({
+        path: tab.path,
+        element: tab.component,
+      })),
     },
     {
       path: "item2",
       element: <Item2 />,
-      children: [
-        {
-          path: "tab1",
-          element: <SectionBItem2Tab1 />,
-        },
-        {
-          path: "tab2",
-          element: <SectionBItem2Tab2 />,
-        },
-      ],
+      children: item2Tabs.map((tab) => ({
+        path: tab.path,
+        element: tab.component,
+      })),
     },
   ],
 };
