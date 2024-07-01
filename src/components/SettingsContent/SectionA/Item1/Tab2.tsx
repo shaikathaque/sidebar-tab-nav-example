@@ -28,7 +28,7 @@ const tab1FormSchema = z.object({
   }),
 })
 
-export default function SectionAItem1Tab1() {
+export default function SectionAItem1Tab2() {
 
   function onSubmit(values: z.infer<typeof tab1FormSchema>) {
     toast({
@@ -55,8 +55,8 @@ export default function SectionAItem1Tab1() {
   return (
     <div className="mt-4">
       <div className="py-4">
-        <h1 className="text-2xl font-semibold">Section A Item 1 Tab 1</h1>
-        <p>Description for Section A Item 1 Tab 1</p>
+        <h1 className="text-2xl font-semibold">Section A Item 1 Tab 2</h1>
+        <p>Description for Section A Item 1 Tab 2</p>
       </div>
       <Form {...tab1Form}>
         <form onSubmit={tab1Form.handleSubmit(onSubmit)} className="space-y-8">

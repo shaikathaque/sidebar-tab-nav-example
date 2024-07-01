@@ -10,7 +10,7 @@ import { toast } from "@/components/ui/use-toast"
 const field2Items = [{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3", label: "3" }, { id: "4", label: "4" }, { id: "5", label: "5" } ] as const
 const field4Items = [{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3", label: "3" }, { id: "4", label: "4" }, { id: "5", label: "5" } ] as const
 
-const tab1FormSchema = z.object({
+const tabFormSchema = z.object({
   field1: z.string().min(2, {
     message: "field1 must be at least 2 characters.",
   }),
@@ -28,9 +28,9 @@ const tab1FormSchema = z.object({
   }),
 })
 
-export default function SectionAItem1Tab1() {
+export default function SectionBItem1Tab1() {
 
-  function onSubmit(values: z.infer<typeof tab1FormSchema>) {
+  function onSubmit(values: z.infer<typeof tabFormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -41,8 +41,8 @@ export default function SectionAItem1Tab1() {
     })
   }
 
-  const tab1Form = useForm<z.infer<typeof tab1FormSchema>>({
-    resolver: zodResolver(tab1FormSchema),
+  const tab1Form = useForm<z.infer<typeof tabFormSchema>>({
+    resolver: zodResolver(tabFormSchema),
     defaultValues: {
       field1: "",
       field2: [],
@@ -55,8 +55,8 @@ export default function SectionAItem1Tab1() {
   return (
     <div className="mt-4">
       <div className="py-4">
-        <h1 className="text-2xl font-semibold">Section A Item 1 Tab 1</h1>
-        <p>Description for Section A Item 1 Tab 1</p>
+        <h1 className="text-2xl font-semibold">Section B Item 1 Tab 1</h1>
+        <p>Description for Section B Item 1 Tab 1</p>
       </div>
       <Form {...tab1Form}>
         <form onSubmit={tab1Form.handleSubmit(onSubmit)} className="space-y-8">
