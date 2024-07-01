@@ -1,5 +1,5 @@
-import SettingsTabs from "@/components/SettingsTabs"
-import { Outlet } from "react-router-dom"
+import SettingsTabs from "@/components/SettingsTabs";
+import { Outlet } from "react-router-dom";
 
 const item1Tabs = [
   {
@@ -12,7 +12,7 @@ const item1Tabs = [
     title: "Tab 2",
     path: "/tab2",
   },
-]
+];
 
 export function Item1() {
   return (
@@ -20,7 +20,7 @@ export function Item1() {
       <SettingsTabs tabs={item1Tabs} />
       <Outlet />
     </>
-  )
+  );
 }
 
 const item2Tabs = [
@@ -34,7 +34,7 @@ const item2Tabs = [
     title: "Tab 2",
     path: "/tab2",
   },
-]
+];
 
 export function Item2() {
   return (
@@ -42,5 +42,5 @@ export function Item2() {
       <SettingsTabs tabs={item2Tabs} />
       <Outlet />
     </>
-  )
+  );
 }

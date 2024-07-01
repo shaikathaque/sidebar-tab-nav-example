@@ -1,15 +1,34 @@
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "@/components/ui/use-toast"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "@/components/ui/use-toast";
 
-const field2Items = [{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3", label: "3" }, { id: "4", label: "4" }, { id: "5", label: "5" } ] as const
-const field4Items = [{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3", label: "3" }, { id: "4", label: "4" }, { id: "5", label: "5" } ] as const
-
+const field2Items = [
+  { id: "1", label: "1" },
+  { id: "2", label: "2" },
+  { id: "3", label: "3" },
+  { id: "4", label: "4" },
+  { id: "5", label: "5" },
+] as const;
+const field4Items = [
+  { id: "1", label: "1" },
+  { id: "2", label: "2" },
+  { id: "3", label: "3" },
+  { id: "4", label: "4" },
+  { id: "5", label: "5" },
+] as const;
 
 const tab1FormSchema = z.object({
   field1: z.string().min(2, {
@@ -27,10 +46,9 @@ const tab1FormSchema = z.object({
   field5: z.string().min(2, {
     message: "field5 must be at least 2 characters.",
   }),
-})
+});
 
 export default function SectionAItem2Tab1() {
-
   function onSubmit(values: z.infer<typeof tab1FormSchema>) {
     toast({
       title: "You submitted the following values:",
@@ -39,7 +57,7 @@ export default function SectionAItem2Tab1() {
           <code className="text-white">{JSON.stringify(values, null, 2)}</code>
         </pre>
       ),
-    })
+    });
   }
 
   const tab1Form = useForm<z.infer<typeof tab1FormSchema>>({
@@ -51,7 +69,7 @@ export default function SectionAItem2Tab1() {
       field4: [],
       field5: "",
     },
-  })
+  });
 
   return (
     <div className="mt-4">
@@ -61,7 +79,6 @@ export default function SectionAItem2Tab1() {
       </div>
       <Form {...tab1Form}>
         <form onSubmit={tab1Form.handleSubmit(onSubmit)} className="space-y-8">
-
           {/* Field 1 */}
           <FormField
             control={tab1Form.control}
@@ -72,9 +89,7 @@ export default function SectionAItem2Tab1() {
                 <FormControl>
                   <Input placeholder="field1 placeholder" {...field} />
                 </FormControl>
-                <FormDescription>
-                  field1 description
-                </FormDescription>
+                <FormDescription>field1 description</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -88,9 +103,7 @@ export default function SectionAItem2Tab1() {
               <FormItem>
                 <div className="mb-4">
                   <FormLabel className="text-base">Field 2</FormLabel>
-                  <FormDescription>
-                    field2 Description
-                  </FormDescription>
+                  <FormDescription>field2 Description</FormDescription>
                 </div>
                 {field2Items.map((item) => (
                   <FormField
@@ -111,9 +124,9 @@ export default function SectionAItem2Tab1() {
                                   ? field.onChange([...field.value, item.id])
                                   : field.onChange(
                                       field.value?.filter(
-                                        (value) => value !== item.id
-                                      )
-                                    )
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
                               }}
                             />
                           </FormControl>
@@ -121,7 +134,7 @@ export default function SectionAItem2Tab1() {
                             {item.label}
                           </FormLabel>
                         </FormItem>
-                      )
+                      );
                     }}
                   />
                 ))}
@@ -140,9 +153,7 @@ export default function SectionAItem2Tab1() {
                 <FormControl>
                   <Input placeholder="field3 placeholder" {...field} />
                 </FormControl>
-                <FormDescription>
-                  field3 description
-                </FormDescription>
+                <FormDescription>field3 description</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -156,9 +167,7 @@ export default function SectionAItem2Tab1() {
               <FormItem>
                 <div className="mb-4">
                   <FormLabel className="text-base">Field 4</FormLabel>
-                  <FormDescription>
-                    field4 Description
-                  </FormDescription>
+                  <FormDescription>field4 Description</FormDescription>
                 </div>
                 {field4Items.map((item) => (
                   <FormField
@@ -179,9 +188,9 @@ export default function SectionAItem2Tab1() {
                                   ? field.onChange([...field.value, item.id])
                                   : field.onChange(
                                       field.value?.filter(
-                                        (value) => value !== item.id
-                                      )
-                                    )
+                                        (value) => value !== item.id,
+                                      ),
+                                    );
                               }}
                             />
                           </FormControl>
@@ -189,7 +198,7 @@ export default function SectionAItem2Tab1() {
                             {item.label}
                           </FormLabel>
                         </FormItem>
-                      )
+                      );
                     }}
                   />
                 ))}
@@ -208,9 +217,7 @@ export default function SectionAItem2Tab1() {
                 <FormControl>
                   <Input placeholder="field5 placeholder" {...field} />
                 </FormControl>
-                <FormDescription>
-                  field5 description
-                </FormDescription>
+                <FormDescription>field5 description</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -220,6 +227,5 @@ export default function SectionAItem2Tab1() {
         </form>
       </Form>
     </div>
-  )
-
+  );
 }

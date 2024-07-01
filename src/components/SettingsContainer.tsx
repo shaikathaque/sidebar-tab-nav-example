@@ -1,24 +1,24 @@
 import { Outlet } from "react-router-dom";
-import Sidebar, { SidebarSection } from "./Sidebar"
+import Sidebar, { SidebarSection } from "./Sidebar";
 
 const sidebarData: SidebarSection[] = [
   {
-    title: 'Section A',
-    value: 'sectionA',
+    title: "Section A",
+    value: "sectionA",
     items: [
-      { title: 'Item 1', path: '/sectionA/item1/tab1' },
-      { title: 'Item 2', path: '/sectionA/item2/tab1' },
-    ]
+      { title: "Item 1", path: "/sectionA/item1/tab1" },
+      { title: "Item 2", path: "/sectionA/item2/tab1" },
+    ],
   },
   {
-    title: 'Section B',
-    value: 'sectionB',
+    title: "Section B",
+    value: "sectionB",
     items: [
-      { title: 'Item 1', path: '/sectionB/item1/tab1' },
-      { title: 'Item 2', path: '/sectionB/item2/tab1' },
-    ]
-  }
-]
+      { title: "Item 1", path: "/sectionB/item1/tab1" },
+      { title: "Item 2", path: "/sectionB/item2/tab1" },
+    ],
+  },
+];
 
 export default function SettingsContainer() {
   return (
@@ -32,5 +32,5 @@ export default function SettingsContainer() {
         </div>
       </div>
     </div>
-  )
+  );
 }

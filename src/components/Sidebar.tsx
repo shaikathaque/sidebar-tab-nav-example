@@ -1,23 +1,27 @@
 import { Link } from "react-router-dom";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 import { Button } from "./ui/button";
-import { Settings } from 'lucide-react';
+import { Settings } from "lucide-react";
 
 type SidebarItem = {
-  title: string
-  path: string
-}
+  title: string;
+  path: string;
+};
 
 export type SidebarSection = {
-  title: string
-  items: SidebarItem[]
-  value: string
-}
+  title: string;
+  items: SidebarItem[];
+  value: string;
+};
 
 type SidebarProps = {
-  sidebarData: SidebarSection[]
-}
-
+  sidebarData: SidebarSection[];
+};
 
 export default function Sidebar({ sidebarData }: SidebarProps) {
   return (
@@ -31,7 +35,7 @@ export default function Sidebar({ sidebarData }: SidebarProps) {
                   <AccordionItem key={section.value} value={section.value}>
                     <AccordionTrigger>
                       <Button variant="ghost" className="w-full justify-start">
-                        <Settings className="mr-2 h-4 w-4"/>
+                        <Settings className="mr-2 h-4 w-4" />
                         {section.title}
                       </Button>
                     </AccordionTrigger>
@@ -39,21 +43,23 @@ export default function Sidebar({ sidebarData }: SidebarProps) {
                       {section.items.map((item) => {
                         return (
                           <Link key={item.title} to={item.path}>
-                            <Button variant="ghost" className="w-full justify-start">
+                            <Button
+                              variant="ghost"
+                              className="w-full justify-start"
+                            >
                               {item.title}
                             </Button>
                           </Link>
-                        )
+                        );
                       })}
                     </AccordionContent>
-                
                   </AccordionItem>
-                )
+                );
               })}
             </Accordion>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,3 +1,5 @@
+const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -6,7 +8,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'src/components/ui/*'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
@@ -15,4 +17,5 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  eslintPluginPrettierRecommended
 }
