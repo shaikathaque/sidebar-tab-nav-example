@@ -1,7 +1,8 @@
-import { default as SectionAItem1 } from "./SettingsContent/SectionA/Item1";
-import { default as SectionAItem2 } from "./SettingsContent/SectionA/Item2";
-import { default as SectionBItem1 }  from "./SettingsContent/SectionB/Item1";
-import { default as SectionBItem2 }  from "./SettingsContent/SectionB/Item2";
+import SectionAItem1Tab1 from "./SettingsContent/SectionA/Item1/Tab1";
+import { Item1 as SectionAItem1, Item2 as SectionAItem2 } from "./SettingsContent/SectionA/SectionA";
+import { Item1 as SectionBItem1, Item2 as SectionBItem2 } from "./SettingsContent/SectionB/SectionB";
+
+
 
 export const settingsRoutes = [
   {
@@ -13,7 +14,7 @@ export const settingsRoutes = [
         children: [
           {
             path: "tab1",
-            element: <p>Section A - Item 1 - Tab 1</p>
+            element: <SectionAItem1Tab1 />
           },
           {
             path: "tab2",
