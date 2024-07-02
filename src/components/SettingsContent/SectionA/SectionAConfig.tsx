@@ -1,15 +1,16 @@
-import SectionAItem1Tab1 from "./Item1/Tab1";
+import DynamicForm from "@/components/DynamicForm";
 import SectionAItem1Tab2 from "./Item1/Tab2";
 import SectionAItem2Tab1 from "./Item2/Tab1";
 import SectionAItem2Tab2 from "./Item2/Tab2";
 import SettingsItemContainer from "@/components/SettingsItemContainer";
+import { tab1FormConfig } from "./Item1/Tab1Config";
 
 export const item1Tabs = [
   {
     value: "tab1",
     title: "Tab 1",
     path: "tab1",
-    component: <SectionAItem1Tab1 />,
+    component: <DynamicForm {...tab1FormConfig} />,
   },
   {
     value: "tab2",
