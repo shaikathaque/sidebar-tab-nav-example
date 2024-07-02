@@ -1,21 +1,25 @@
-import SectionBItem1Tab1 from "./Item1/Tab1";
-import SectionBItem1Tab2 from "./Item1/Tab2";
-import SectionBItem2Tab1 from "./Item2/Tab1";
-import SectionBItem2Tab2 from "./Item2/Tab2";
+import DynamicForm from "@/components/DynamicForm";
+
 import SettingsItemContainer from "@/components/SettingsItemContainer";
+
+import { tab1FormConfig as item1Tab1FormConfig } from "./Item1/Tab1Config";
+import { tab2FormConfig as item1Tab2FormConfig } from "./Item1/Tab2Config";
+
+import { tab1FormConfig as item2Tab1FormConfig } from "./Item2/Tab1Config";
+import { tab2FormConfig as item2Tab2FormConfig } from "./Item2/Tab2Config";
 
 export const item1Tabs = [
   {
     value: "tab1",
     title: "Tab 1",
     path: "tab1",
-    component: <SectionBItem1Tab1 />,
+    component: <DynamicForm {...item1Tab1FormConfig} />,
   },
   {
     value: "tab2",
     title: "Tab 2",
     path: "tab2",
-    component: <SectionBItem1Tab2 />,
+    component: <DynamicForm {...item1Tab2FormConfig} />,
   },
 ];
 
@@ -24,13 +28,13 @@ export const item2Tabs = [
     value: "tab1",
     title: "Tab 1",
     path: "tab1",
-    component: <SectionBItem2Tab1 />,
+    component: <DynamicForm {...item2Tab1FormConfig} />,
   },
   {
     value: "tab2",
     title: "Tab 2",
     path: "tab2",
-    component: <SectionBItem2Tab2 />,
+    component: <DynamicForm {...item2Tab2FormConfig} />,
   },
 ];
 
