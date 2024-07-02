@@ -2,6 +2,10 @@
 
 This React + Vite project is built to evaluate a potential implementation for a web application with a very specific navigation and form layout requirements.
 
+## Demo Video
+
+https://github.com/shaikathaque/sidebar-tab-nav-example/assets/9042881/190c5bf8-ce7e-4cfd-8a32-48acc7a7d1ef
+
 ## Running Locally
 
 - Install debendencies
