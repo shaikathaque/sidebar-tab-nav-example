@@ -9,10 +9,12 @@ import {
 import { Control } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 
+export type Item = { id: string; label: string };
+
 type Props = {
   formControl: Control;
   name: string;
-  items: { id: string; label: string }[];
+  items: Item[];
   label: string;
   description: string;
 };

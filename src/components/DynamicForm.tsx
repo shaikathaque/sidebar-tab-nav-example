@@ -6,23 +6,25 @@ import { Button } from "@/components/ui/button";
 
 import { Form, FormField } from "@/components/ui/form";
 import InputField from "./FormFields/InputField";
-import CheckboxField from "./FormFields/CheckboxField";
+import CheckboxField, { Item } from "./FormFields/CheckboxField";
 
 type FormField = {
   type: string;
   name: string;
+  schema:
+    | z.ZodString
+    | z.ZodEffects<z.ZodArray<z.ZodString, "many">, string[], string[]>;
   defaultValue: string | unknown[];
   label: string;
   placeholder: string;
   description: string;
-  items?: { id: string; label: string }[];
+  items?: Item[];
 };
 
 type FormConfig = {
   title: string;
   description: string;
   formFields: FormField[];
-  formSchema: z.ZodObject<any, any>;
 };
 
 const getDefaultValues = (formFields: FormField[]) => {
@@ -32,8 +34,16 @@ const getDefaultValues = (formFields: FormField[]) => {
   );
 };
 
+const getFormSchema = (formFields: FormField[]) => {
+  return z.object(
+    Object.assign(
+      {},
+      ...formFields.map((field) => ({ [field.name]: field.schema })),
+    ),
+  );
+};
+
 export default function DynamicForm({
-  formSchema,
   formFields,
   title,
   description,
@@ -48,6 +58,8 @@ export default function DynamicForm({
       ),
     });
   }
+
+  const formSchema = getFormSchema(formFields);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
