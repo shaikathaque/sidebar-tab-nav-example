@@ -34,10 +34,8 @@ export default function Sidebar({ sidebarData }: SidebarProps) {
                 return (
                   <AccordionItem key={section.value} value={section.value}>
                     <AccordionTrigger>
-                      <Button variant="ghost" className="w-full justify-start">
-                        <Settings className="mr-2 h-4 w-4" />
-                        {section.title}
-                      </Button>
+                      <Settings className="mr-2 h-4 w-4" />
+                      {section.title}
                     </AccordionTrigger>
                     <AccordionContent>
                       {section.items.map((item) => {
