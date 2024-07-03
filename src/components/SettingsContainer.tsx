@@ -22,6 +22,7 @@ const sidebarData: SidebarSection[] = [
 ];
 
 export default function SettingsContainer() {
+  // TODO: Use React Query to fetch settings and store in cache
   useEffect(() => {
     const getFormData = async () => {
       // Fetch form data

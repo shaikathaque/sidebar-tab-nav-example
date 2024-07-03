@@ -16,6 +16,7 @@ const field4Items = [
   { id: "5", label: "5" },
 ];
 
+// TODO: add propertyName field to indicate the property name in the API - so that default value can be set from API response
 const tab1FormFields = [
   {
     type: "input",
