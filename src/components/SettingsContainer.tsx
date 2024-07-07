@@ -1,8 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Sidebar, { SidebarSection } from "./Sidebar";
-import { useEffect } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSettings } from "@/api/Settings";
 
 const sidebarData: SidebarSection[] = [
   {
@@ -24,14 +21,6 @@ const sidebarData: SidebarSection[] = [
 ];
 
 export default function SettingsContainer() {
-  // const queryClient = useQueryClient();
-
-  const query = useQuery({ queryKey: ["settings"], queryFn: getSettings });
-
-  useEffect(() => {
-    console.log("settings query data:", query.data);
-  }, [query]);
-
   return (
     <div className="grid grid-cols-5">
       <Sidebar sidebarData={sidebarData} />
