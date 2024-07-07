@@ -7,6 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import InputField from "./FormFields/InputField";
 import CheckboxField, { Item } from "./FormFields/CheckboxField";
+import { useQuery } from "@tanstack/react-query";
+import { Settings, getSettings } from "@/api/Settings";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 type FormField = {
   type: string;
@@ -34,6 +38,23 @@ const getDefaultValues = (formFields: FormField[]) => {
   );
 };
 
+const getExistingValues = (
+  existingSettings: Settings | undefined,
+  formFields: FormField[],
+) => {
+  if (!existingSettings) {
+    return getDefaultValues(formFields);
+  }
+
+  const result = Object.assign(
+    {},
+    ...formFields.map((field) => ({
+      [field.name]: existingSettings[field.name] || field.defaultValue,
+    })),
+  );
+  return result;
+};
+
 const getFormSchema = (formFields: FormField[]) => {
   return z.object(
     Object.assign(
@@ -48,6 +69,12 @@ export default function DynamicForm({
   title,
   description,
 }: FormConfig) {
+  const location = useLocation();
+  const { data, isLoading } = useQuery({
+    queryKey: ["settings"],
+    queryFn: getSettings,
+  });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast({
       title: "You submitted the following values:",
@@ -66,6 +93,12 @@ export default function DynamicForm({
     resolver: zodResolver(formSchema),
     defaultValues: getDefaultValues(formFields),
   });
+
+  useEffect(() => {
+    if (data) {
+      form.reset(getExistingValues(data, formFields));
+    }
+  }, [data, location]);
 
   const renderFormField = (formField: FormField) => {
     switch (formField.type) {
@@ -102,14 +135,19 @@ export default function DynamicForm({
         <h1 className="text-2xl font-semibold">{title}</h1>
         <p>{description}</p>
       </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {/* Generate Form Fields based on config */}
-          {formFields.map((formField) => renderFormField(formField))}
+      {isLoading ? (
+        <h1>Loading</h1>
+      ) : (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            {/* Generate Form Fields based on config */}
+            {formFields.map((formField) => renderFormField(formField))}
 
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+            <Button type="submit">Submit</Button>
+            <Button onClick={() => form.reset()}>Undo</Button>
+          </form>
+        </Form>
+      )}
     </div>
   );
 }

@@ -64,6 +64,17 @@ const tab1FormFields = [
     placeholder: "Field 4 Placeholder",
     description: "Field 4 Description",
   },
+  {
+    type: "input",
+    name: "field5",
+    schema: z.string().min(2, {
+      message: "field5 must be at least 2 characters.",
+    }),
+    defaultValue: "",
+    label: "Field 5",
+    placeholder: "Field 5 Placeholder",
+    description: "Field 5 Description",
+  },
 ];
 
 export const tab1FormConfig = {

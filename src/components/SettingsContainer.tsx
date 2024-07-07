@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Sidebar, { SidebarSection } from "./Sidebar";
 import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getSettings } from "@/api/Settings";
 
 const sidebarData: SidebarSection[] = [
   {
@@ -22,20 +24,13 @@ const sidebarData: SidebarSection[] = [
 ];
 
 export default function SettingsContainer() {
-  // TODO: Use React Query to fetch settings and store in cache
+  // const queryClient = useQueryClient();
+
+  const query = useQuery({ queryKey: ["settings"], queryFn: getSettings });
+
   useEffect(() => {
-    const getFormData = async () => {
-      // Fetch form data
-      try {
-        const result = await fetch("/api/settings");
-        const data = await result.json();
-        console.log(data);
-      } catch (err) {
-        console.log("Error fetching form data: ", err);
-      }
-    };
-    getFormData();
-  }, []);
+    console.log("settings query data:", query.data);
+  }, [query]);
 
   return (
     <div className="grid grid-cols-5">

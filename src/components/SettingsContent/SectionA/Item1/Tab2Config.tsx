@@ -1,67 +1,78 @@
 import { z } from "zod";
 
-const field2Items = [
-  { id: "1", label: "1" },
-  { id: "2", label: "2" },
-  { id: "3", label: "3" },
-  { id: "4", label: "4" },
+const field7Items = [
   { id: "5", label: "5" },
+  { id: "6", label: "6" },
+  { id: "7", label: "7" },
+  { id: "8", label: "8" },
+  { id: "9", label: "9" },
 ];
 
-const field4Items = [
-  { id: "1", label: "1" },
-  { id: "2", label: "2" },
-  { id: "3", label: "3" },
-  { id: "4", label: "4" },
-  { id: "5", label: "5" },
+const field9Items = [
+  { id: "7", label: "7" },
+  { id: "8", label: "8" },
+  { id: "9", label: "9" },
+  { id: "10", label: "10" },
+  { id: "11", label: "11" },
 ];
 
 const tab2FormFields = [
   {
     type: "input",
-    name: "field1",
+    name: "field6",
     schema: z.string().min(2, {
-      message: "field1 must be at least 2 characters.",
+      message: "field6 must be at least 2 characters.",
     }),
     defaultValue: "",
-    label: "Field 1",
-    placeholder: "Field 1 Placeholder",
-    description: "Field 1 Description",
+    label: "Field 6",
+    placeholder: "Field 6 Placeholder",
+    description: "Field 6 Description",
   },
   {
     type: "checkbox",
-    name: "field2",
+    name: "field7",
     schema: z.array(z.string()).refine((value) => value.some((item) => item), {
       message: "You have to select at least one item.",
     }),
-    items: field2Items,
+    items: field7Items,
     defaultValue: [],
-    label: "Field 2",
-    placeholder: "Field 2 Placeholder",
-    description: "Field 2 Description",
+    label: "Field 7",
+    placeholder: "Field 7 Placeholder",
+    description: "Field 7 Description",
   },
   {
     type: "input",
-    name: "field3",
+    name: "field8",
     schema: z.string().min(2, {
-      message: "field3 must be at least 2 characters.",
+      message: "field8 must be at least 2 characters.",
     }),
     defaultValue: "",
-    label: "Field 3",
-    placeholder: "Field 3 Placeholder",
-    description: "Field 3 Description",
+    label: "Field 8",
+    placeholder: "Field 8 Placeholder",
+    description: "Field 8 Description",
   },
   {
     type: "checkbox",
-    name: "field4",
+    name: "field9",
     schema: z.array(z.string()).refine((value) => value.some((item) => item), {
       message: "You have to select at least one item.",
     }),
-    items: field4Items,
+    items: field9Items,
     defaultValue: [],
-    label: "Field 4",
-    placeholder: "Field 4 Placeholder",
-    description: "Field 4 Description",
+    label: "Field 9",
+    placeholder: "Field 9 Placeholder",
+    description: "Field 9 Description",
+  },
+  {
+    type: "input",
+    name: "field10",
+    schema: z.string().min(2, {
+      message: "field10 must be at least 2 characters.",
+    }),
+    defaultValue: "",
+    label: "Field 10",
+    placeholder: "Field 10 Placeholder",
+    description: "Field 10 Description",
   },
 ];
 
