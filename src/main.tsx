@@ -10,7 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { settingsRoutes } from "./components/SettingsConfig";
 import { Toaster } from "./components/ui/toaster";
-import Test from "./components/Test";
+import TableExample from "./components/TableExample";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element: <Test />,
+    element: <TableExample />,
     errorElement: <h1>Custom Error Page</h1>,
   },
 ]);

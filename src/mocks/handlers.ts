@@ -6,7 +6,7 @@ export const handlers = [
       field1: "Field 1 value",
       field2: ["2"],
       field3: "Field 3 value",
-      field4: ["4"],
+      field4: ["AAA", "BBB"],
       field5: "Field 5 value",
       field6: "Field 6 value",
       field7: ["7"],
