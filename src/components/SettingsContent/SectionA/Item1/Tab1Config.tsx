@@ -8,14 +8,6 @@ const field2Items = [
   { id: "5", label: "5" },
 ];
 
-const field4Items = [
-  { id: "1", label: "1" },
-  { id: "2", label: "2" },
-  { id: "3", label: "3" },
-  { id: "4", label: "4" },
-  { id: "5", label: "5" },
-];
-
 // TODO: add propertyName field to indicate the property name in the API - so that default value can be set from API response
 const tab1FormFields = [
   {
@@ -53,16 +45,15 @@ const tab1FormFields = [
     description: "Field 3 Description",
   },
   {
-    type: "checkbox",
+    type: "dynamic",
     name: "field4",
-    schema: z.array(z.string()).refine((value) => value.some((item) => item), {
-      message: "You have to select at least one item.",
-    }),
-    items: field4Items,
+    label: "field4",
+    schema: z.array(
+      z.string().min(2, {
+        message: "field4 must be at least 2 characters.",
+      }),
+    ),
     defaultValue: [],
-    label: "Field 4",
-    placeholder: "Field 4 Placeholder",
-    description: "Field 4 Description",
   },
   {
     type: "input",

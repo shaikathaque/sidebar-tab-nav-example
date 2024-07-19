@@ -7,6 +7,7 @@ import { Form, FormField } from "@/components/ui/form";
 import InputField from "./FormFields/InputField";
 import CheckboxField, { Item } from "./FormFields/CheckboxField";
 import { Settings } from "@/api/Settings";
+import DynamicField from "./FormFields/DynamicField";
 
 type FormField = {
   type: string;
@@ -74,6 +75,15 @@ export default function DynamicForm({
             label={formField.label}
             description={formField.description}
             items={formField.items!}
+          />
+        );
+      case "dynamic":
+        return (
+          <DynamicField
+            key={formField.name}
+            name={formField.name}
+            formControl={form.control}
+            label={formField.label}
           />
         );
       default:

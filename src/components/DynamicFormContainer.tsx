@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Settings, getSettings } from "@/api/Settings";
 import { Skeleton } from "./ui/skeleton";
 import DynamicForm from "./DynamicForm";
+import { useLocation } from "react-router-dom";
 
 type FormField = {
   type: string;
@@ -54,6 +55,7 @@ export default function DynamicFormContainer({
   title,
   description,
 }: FormConfig) {
+  const { pathname } = useLocation();
   const { data, isLoading } = useQuery({
     queryKey: ["settings"],
     queryFn: getSettings,
@@ -75,7 +77,7 @@ export default function DynamicFormContainer({
   const formSchema = getFormSchema(formFields);
 
   return (
-    <div className="mt-4">
+    <div className="mt-4" key={pathname}>
       <div className="py-4">
         <h1 className="text-2xl font-semibold">{title}</h1>
         <p>{description}</p>
