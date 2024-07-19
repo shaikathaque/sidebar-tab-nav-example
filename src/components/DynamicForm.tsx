@@ -48,6 +48,10 @@ export default function DynamicForm({
     defaultValues: defaultValues,
   });
 
+  const handleUndo = () => {
+    form.reset(defaultValues);
+  };
+
   const renderFormField = (formField: FormField) => {
     switch (formField.type) {
       case "input":
@@ -86,7 +90,9 @@ export default function DynamicForm({
 
           <div>
             <Button type="submit">Submit</Button>
-            <Button onClick={() => form.reset()}>Undo</Button>
+            <Button type="button" onClick={handleUndo}>
+              Undo
+            </Button>
           </div>
         </form>
       </Form>

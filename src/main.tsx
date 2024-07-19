@@ -10,6 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { settingsRoutes } from "./components/SettingsConfig";
 import { Toaster } from "./components/ui/toaster";
+import Test from "./components/Test";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
     element: <SettingsContainer />,
     errorElement: <h1>Custom Error Page</h1>,
     children: settingsRoutes,
+  },
+  {
+    path: "/test",
+    element: <Test />,
+    errorElement: <h1>Custom Error Page</h1>,
   },
 ]);
 

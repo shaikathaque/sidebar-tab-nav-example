@@ -1,5 +1,3 @@
-import DynamicForm from "@/components/DynamicForm";
-
 import SettingsItemContainer from "@/components/SettingsItemContainer";
 
 import { tab1FormConfig as item1Tab1FormConfig } from "./Item1/Tab1Config";
