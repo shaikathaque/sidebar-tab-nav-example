@@ -33,17 +33,6 @@ const tab1FormFields = [
     placeholder: "Field 2 Placeholder",
     description: "Field 2 Description",
   },
-  // {
-  //   type: "input",
-  //   name: "field3",
-  //   schema: z.string().min(2, {
-  //     message: "field3 must be at least 2 characters.",
-  //   }),
-  //   defaultValue: "",
-  //   label: "Field 3",
-  //   placeholder: "Field 3 Placeholder",
-  //   description: "Field 3 Description",
-  // },
   {
     type: "table",
     name: "field3",

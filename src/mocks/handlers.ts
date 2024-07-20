@@ -5,7 +5,10 @@ export const handlers = [
     return HttpResponse.json({
       field1: "Field 1 value",
       field2: ["2"],
-      field3: "Field 3 value",
+      field3: [
+        { columnA: "Row 1 Column A", columnB: "Row 1 Column B" },
+        { columnA: "Row 2 Column A", columnB: "Row 2 Column B" },
+      ],
       field4: ["AAA", "BBB"],
       field5: "Field 5 value",
       field6: "Field 6 value",
