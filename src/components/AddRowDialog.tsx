@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { toast } from "./ui/use-toast";
+import { z, ZodString } from "zod";
+
 import {
   Dialog,
   DialogContent,
@@ -20,26 +20,30 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
-
-const DialogFormSchema = z.object({
-  columnA: z.string().min(2, {
-    message: "ColumnA must be at least 2 characters.",
-  }),
-  columnB: z.string().min(2, {
-    message: "ColumnB must be at least 2 characters.",
-  }),
-});
-
 interface Column {
   name: string;
   label: string;
+  schema: ZodString;
 }
 interface Props {
   columns: Column[];
-  append: (data: { columnA: string; columnB: string }) => void;
+  append: (data: { [x: string]: string }) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
+
+const getFormSchema = (columns: Column[]) => {
+  return z.object(
+    Object.assign(
+      {},
+      ...columns.map((column) => ({ [column.name]: column.schema })),
+    ),
+  );
+};
+
+const getDefaultValues = (columns: Column[]) => {
+  return Object.assign({}, ...columns.map((column) => ({ [column.name]: "" })));
+};
 
 export default function AddRowDialog({
   columns,
@@ -47,25 +51,15 @@ export default function AddRowDialog({
   isOpen,
   setIsOpen,
 }: Props) {
-  const dialogForm = useForm<z.infer<typeof DialogFormSchema>>({
-    resolver: zodResolver(DialogFormSchema),
-    defaultValues: {
-      columnA: "",
-      columnB: "",
-    },
+  const FormSchema = getFormSchema(columns);
+  const dialogForm = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: getDefaultValues(columns),
   });
 
-  function onDialogFormSubmit(data: z.infer<typeof DialogFormSchema>) {
+  function onDialogFormSubmit(data: z.infer<typeof FormSchema>) {
     append(data);
     setIsOpen(false);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
   }
 
   return (

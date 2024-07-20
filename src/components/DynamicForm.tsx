@@ -8,6 +8,7 @@ import InputField from "./FormFields/InputField";
 import CheckboxField, { Item } from "./FormFields/CheckboxField";
 import { Settings } from "@/api/Settings";
 import DynamicField from "./FormFields/DynamicField";
+import TableField, { Column } from "./FormFields/TableField";
 
 type FormField = {
   type: string;
@@ -20,6 +21,7 @@ type FormField = {
   placeholder: string;
   description: string;
   items?: Item[];
+  columns?: Column[];
 };
 
 type FormConfig = {
@@ -84,6 +86,16 @@ export default function DynamicForm({
             name={formField.name}
             formControl={form.control}
             label={formField.label}
+          />
+        );
+      case "table":
+        return (
+          <TableField
+            key={formField.name}
+            name={formField.name}
+            formControl={form.control}
+            label={formField.label}
+            columns={formField.columns!}
           />
         );
       default:
