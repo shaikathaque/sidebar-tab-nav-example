@@ -47,7 +47,9 @@ export default function TableDemo({
   return (
     <div className="mt-4 flex w-full flex-col justify-center">
       <div className="mb-2 flex">
-        <Button onClick={() => setIsAddDialogOpen(true)}>Add</Button>
+        <Button type="button" onClick={() => setIsAddDialogOpen(true)}>
+          Add
+        </Button>
       </div>
 
       <Label>{label}</Label>

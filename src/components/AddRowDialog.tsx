@@ -59,6 +59,7 @@ export default function AddRowDialog({
 
   function onDialogFormSubmit(data: z.infer<typeof FormSchema>) {
     append(data);
+    dialogForm.reset();
     setIsOpen(false);
   }
 

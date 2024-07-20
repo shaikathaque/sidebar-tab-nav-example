@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { toast } from "./ui/use-toast";
+import { z, ZodString } from "zod";
 import {
   Dialog,
   DialogContent,
@@ -21,22 +20,23 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 
-const DialogFormSchema = z.object({
-  columnA: z.string().min(2, {
-    message: "ColumnA must be at least 2 characters.",
-  }),
-  columnB: z.string().min(2, {
-    message: "ColumnB must be at least 2 characters.",
-  }),
-});
+const getFormSchema = (columns: Column[]) => {
+  return z.object(
+    Object.assign(
+      {},
+      ...columns.map((column) => ({ [column.name]: column.schema })),
+    ),
+  );
+};
 
 interface Column {
   name: string;
   label: string;
+  schema: ZodString;
 }
 interface Props {
   columns: Column[];
-  update: (index: number, data: { columnA: string; columnB: string }) => void;
+  update: (index: number, data: { [x: string]: string }) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   defaultValues: { columnA: string; columnB: string };
@@ -51,22 +51,16 @@ export default function EditRowDialog({
   defaultValues,
   rowIndex,
 }: Props) {
-  const dialogForm = useForm<z.infer<typeof DialogFormSchema>>({
-    resolver: zodResolver(DialogFormSchema),
+  const FormSchema = getFormSchema(columns);
+
+  const dialogForm = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
     defaultValues,
   });
 
-  function onDialogFormSubmit(data: z.infer<typeof DialogFormSchema>) {
+  function onDialogFormSubmit(data: z.infer<typeof FormSchema>) {
     update(rowIndex, data);
     setIsOpen(false);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
   }
 
   return (
