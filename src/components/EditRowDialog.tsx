@@ -36,27 +36,28 @@ interface Column {
 }
 interface Props {
   columns: Column[];
-  append: (data: { columnA: string; columnB: string }) => void;
+  update: (index: number, data: { columnA: string; columnB: string }) => void;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  defaultValues: { columnA: string; columnB: string };
+  rowIndex: number;
 }
 
-export default function AddRowDialog({
+export default function EditRowDialog({
   columns,
-  append,
+  update,
   isOpen,
   setIsOpen,
+  defaultValues,
+  rowIndex,
 }: Props) {
   const dialogForm = useForm<z.infer<typeof DialogFormSchema>>({
     resolver: zodResolver(DialogFormSchema),
-    defaultValues: {
-      columnA: "",
-      columnB: "",
-    },
+    defaultValues,
   });
 
   function onDialogFormSubmit(data: z.infer<typeof DialogFormSchema>) {
-    append(data);
+    update(rowIndex, data);
     setIsOpen(false);
     toast({
       title: "You submitted the following values:",

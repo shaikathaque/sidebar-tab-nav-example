@@ -16,6 +16,7 @@ import { Form } from "./ui/form";
 import { EditIcon, Trash2Icon } from "lucide-react";
 import AddRowDialog from "./AddRowDialog";
 import { useState } from "react";
+import EditRowDialog from "./EditRowDialog";
 
 const columns = [
   {
@@ -61,6 +62,7 @@ const FormSchema = z.object({
 export default function TableDemo() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editRowIndex, setEditRowIndex] = useState<number | undefined>();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -69,7 +71,7 @@ export default function TableDemo() {
     },
   });
 
-  const { fields, append, remove, replace } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     name: "fieldName",
     control: form.control,
   });
@@ -110,7 +112,13 @@ export default function TableDemo() {
                     <TableCell key={i}>{field[col.name]}</TableCell>
                   ))}
                   <TableCell className="flex flex-row gap-2">
-                    <EditIcon className="hover:cursor-pointer" />
+                    <EditIcon
+                      className="hover:cursor-pointer"
+                      onClick={() => {
+                        setEditRowIndex(index);
+                        setIsEditDialogOpen(true);
+                      }}
+                    />
                     <Trash2Icon
                       className="hover:cursor-pointer"
                       onClick={() => remove(index)}
@@ -129,6 +137,16 @@ export default function TableDemo() {
         isOpen={isAddDialogOpen}
         setIsOpen={setIsAddDialogOpen}
       />
+      {isEditDialogOpen && editRowIndex && (
+        <EditRowDialog
+          columns={columns}
+          update={update}
+          isOpen={isEditDialogOpen}
+          setIsOpen={setIsEditDialogOpen}
+          rowIndex={editRowIndex}
+          defaultValues={fields[editRowIndex]}
+        />
+      )}
     </div>
   );
 }
