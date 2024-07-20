@@ -111,7 +111,7 @@ export default function TableDemo() {
                   {columns.map((col, i) => (
                     <TableCell key={i}>{field[col.name]}</TableCell>
                   ))}
-                  <TableCell className="flex flex-row gap-2">
+                  <TableCell className="flex flex-row justify-end gap-2">
                     <EditIcon
                       className="hover:cursor-pointer"
                       onClick={() => {
