@@ -15,6 +15,7 @@ import { toast } from "./ui/use-toast";
 import { Form } from "./ui/form";
 import { EditIcon, Trash2Icon } from "lucide-react";
 import AddRowDialog from "./AddRowDialog";
+import { useState } from "react";
 
 const columns = [
   {
@@ -58,6 +59,9 @@ const FormSchema = z.object({
 });
 
 export default function TableDemo() {
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -65,7 +69,7 @@ export default function TableDemo() {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     name: "fieldName",
     control: form.control,
   });
@@ -84,7 +88,7 @@ export default function TableDemo() {
   return (
     <div className="mt-4 flex min-h-screen w-full flex-col justify-center">
       <div className="mb-2 flex justify-center">
-        <AddRowDialog columns={columns} append={append} />
+        <Button onClick={() => setIsAddDialogOpen(true)}>Add</Button>
       </div>
       <Form {...form}>
         <form
@@ -119,6 +123,12 @@ export default function TableDemo() {
           <Button type="submit">Save</Button>
         </form>
       </Form>
+      <AddRowDialog
+        columns={columns}
+        append={append}
+        isOpen={isAddDialogOpen}
+        setIsOpen={setIsAddDialogOpen}
+      />
     </div>
   );
 }

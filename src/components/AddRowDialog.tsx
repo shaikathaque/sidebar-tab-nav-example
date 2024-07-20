@@ -9,7 +9,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import {
@@ -38,9 +37,16 @@ interface Column {
 interface Props {
   columns: Column[];
   append: () => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-export default function AddRowDialog({ columns, append }: Props) {
+export default function AddRowDialog({
+  columns,
+  append,
+  isOpen,
+  setIsOpen,
+}: Props) {
   const dialogForm = useForm<z.infer<typeof DialogFormSchema>>({
     resolver: zodResolver(DialogFormSchema),
     defaultValues: {
@@ -51,6 +57,7 @@ export default function AddRowDialog({ columns, append }: Props) {
 
   function onDialogFormSubmit(data: z.infer<typeof DialogFormSchema>) {
     append(data);
+    setIsOpen(false);
     toast({
       title: "You submitted the following values:",
       description: (
@@ -62,10 +69,7 @@ export default function AddRowDialog({ columns, append }: Props) {
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button size={"sm"}>Add</Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...dialogForm}>
           <form onSubmit={dialogForm.handleSubmit(onDialogFormSubmit)}>
