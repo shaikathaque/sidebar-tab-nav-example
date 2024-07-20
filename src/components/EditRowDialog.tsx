@@ -91,7 +91,12 @@ export default function EditRowDialog({
               ))}
             </div>
             <DialogFooter>
-              <Button type="submit">Add</Button>
+              <Button
+                type="button"
+                onClick={dialogForm.handleSubmit(onDialogFormSubmit)}
+              >
+                Add
+              </Button>
             </DialogFooter>
           </form>
         </Form>

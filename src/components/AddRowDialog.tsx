@@ -57,7 +57,7 @@ export default function AddRowDialog({
     defaultValues: getDefaultValues(columns),
   });
 
-  function onDialogFormSubmit(data: z.infer<typeof FormSchema>) {
+  function handleAdd(data: z.infer<typeof FormSchema>) {
     append(data);
     dialogForm.reset();
     setIsOpen(false);
@@ -67,7 +67,8 @@ export default function AddRowDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...dialogForm}>
-          <form onSubmit={dialogForm.handleSubmit(onDialogFormSubmit)}>
+          {/* Avoid native form submit to prevent submitting parent form */}
+          <form>
             <DialogHeader>
               <DialogTitle>Add row</DialogTitle>
               <DialogDescription>Add a new row</DialogDescription>
@@ -91,7 +92,12 @@ export default function AddRowDialog({
               ))}
             </div>
             <DialogFooter>
-              <Button type="submit">Add</Button>
+              <Button
+                type="button"
+                onClick={dialogForm.handleSubmit(handleAdd)}
+              >
+                Add
+              </Button>
             </DialogFooter>
           </form>
         </Form>
