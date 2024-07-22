@@ -23,7 +23,7 @@ const FormSchema = z.object({
   keys: z.array(z.string()).optional(),
 });
 
-export default function InputForm() {
+export default function DynamicInputExample() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
